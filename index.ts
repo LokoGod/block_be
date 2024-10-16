@@ -4,8 +4,7 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 
 // Import custom routes
-// import { proColorRoutes } from "./routes/inventory/proColorRoutes";
-// import { proSizeRoutes } from "./routes/inventory/proSizeRoutes";
+import { fundAmountRoute } from "./routes/fundAmountRoute";
 
 // Import custom middleware
 import { httpStatusCodeHandler } from "./middleware/httpStatusCodeHandler";
@@ -19,8 +18,7 @@ app.use(cors());
 app.use(httpStatusCodeHandler);
 
 // API routing
-// app.use("/api/v1/proColor", proColorRoutes);
-// app.use("/api/v1/proSize", proSizeRoutes);
+app.use("/api/v1/fundAmount", fundAmountRoute);
 
 const port = process.env.PORT || 9000;
 

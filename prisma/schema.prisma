@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,3 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Members {
+  id         Int          @id @default(autoincrement())
+  name       String
+  fundAmount FundAmount[]
+}
+
+model Months {
+  id          Int          @id @default(autoincrement())
+  month_title String
+  fundAmount  FundAmount[]
+}
+
+model FundAmount {
+  id             Int      @id @default(autoincrement())
+  member         Members  @relation(fields: [memberId], references: [id])
+  memberId       Int
+  month          Months   @relation(fields: [monthId], references: [id])
+  monthId        Int
+  donated_amount Int
+  donated_date   DateTime @default(now())
+}
