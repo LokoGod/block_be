@@ -24,9 +24,25 @@ const createFundTransaction = async (
   return fundTransaction;
 };
 
+const getFundTransactionsByMonth = async (monthId: number) => {
+  return prisma.fundTransaction.findMany({
+    where: { monthId: monthId },
+    include: { member: true, month: true },
+  });
+};
+
+const getFundTransactionsByMember = async (memberId: number) => {
+  return prisma.fundTransaction.findMany({
+    where: { memberId: memberId },
+    include: { member: true, month: true },
+  });
+};
+
 const fundTransactionRepository = {
   getAllFundTransaction,
   createFundTransaction,
+  getFundTransactionsByMonth,
+  getFundTransactionsByMember,
 };
 
 export default fundTransactionRepository;
