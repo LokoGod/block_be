@@ -10,16 +10,16 @@ datasource db {
 model Members {
   id         Int          @id @default(autoincrement())
   name       String
-  fundAmount FundAmount[]
+  fundAmount FundTransaction[]
 }
 
 model Months {
   id          Int          @id @default(autoincrement())
   month_title String
-  fundAmount  FundAmount[]
+  fundAmount  FundTransaction[]
 }
 
-model FundAmount {
+model FundTransaction {
   id             Int      @id @default(autoincrement())
   member         Members  @relation(fields: [memberId], references: [id])
   memberId       Int

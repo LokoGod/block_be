@@ -1,8 +1,8 @@
 import express from "express";
 const fundTransactionRoute = express.Router();
 
-import { getAllFundTransactions } from "../controllers/fundTransactionController";
+import { getAllFundTransactions, createFundTransaction } from "../controllers/fundTransactionController";
 
-fundTransactionRoute.route("/").get(getAllFundTransactions);
+fundTransactionRoute.route("/").get(getAllFundTransactions).post(createFundTransaction);
 
 export { fundTransactionRoute };
