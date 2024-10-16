@@ -37,11 +37,34 @@ const getFundTransactionsByMonth = async (req: any, res: any) => {
     const transactionsByMonth =
       await fundTransactionRepository.getFundTransactionsByMonth(monthId);
     if (!transactionsByMonth || transactionsByMonth.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "No such month idiot..." });
+      return res.status(404).json({ error: "No such month idiot..." });
     }
-    res.status(200).json({ transactionsByMonth });
+
+    const totalDonatedAmount = transactionsByMonth.reduce(
+      (sum: number, transaction: any) => {
+        return sum + transaction.donated_amount;
+      },
+      0
+    );
+
+    const highestDonatedAmount = Math.max(
+      ...transactionsByMonth.map(
+        (transaction: any) => transaction.donated_amount
+      )
+    );
+
+    const mvp = transactionsByMonth.find(
+      (transaction: any) => transaction.donated_amount === highestDonatedAmount
+    )?.member.name;
+
+    res
+      .status(200)
+      .json({
+        transactionsByMonth,
+        totalDonatedAmount,
+        highestDonatedAmount,
+        mvp,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -58,9 +81,7 @@ const getFundTransactionsByMember = async (req: any, res: any) => {
     const transactionsByMember =
       await fundTransactionRepository.getFundTransactionsByMember(memberId);
     if (!transactionsByMember || transactionsByMember.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "No such member to be found..." });
+      return res.status(404).json({ error: "No such member to be found..." });
     }
     res.status(200).json({ transactionsByMember });
   } catch (error) {
@@ -73,5 +94,5 @@ export {
   getAllFundTransactions,
   createFundTransaction,
   getFundTransactionsByMonth,
-  getFundTransactionsByMember
+  getFundTransactionsByMember,
 };
