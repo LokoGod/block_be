@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 
 // Import custom routes
-import { fundAmountRoute } from "./routes/fundAmountRoute";
+import { fundTransactionRoute } from "./routes/fundTransactionRoute";
 
 // Import custom middleware
 import { httpStatusCodeHandler } from "./middleware/httpStatusCodeHandler";
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(httpStatusCodeHandler);
 
 // API routing
-app.use("/api/v1/fundAmount", fundAmountRoute);
+app.use("/api/v1/fundTransactions", fundTransactionRoute);
 
 const port = process.env.PORT || 9000;
 
