@@ -8,15 +8,15 @@ datasource db {
 }
 
 model Members {
-  id         Int          @id @default(autoincrement())
-  name       String
-  fundAmount FundTransaction[]
+  id          Int               @id @default(autoincrement())
+  name        String
+  fundDetails FundTransaction[]
 }
 
 model Months {
-  id          Int          @id @default(autoincrement())
+  id          Int               @id @default(autoincrement())
   month_title String
-  fundAmount  FundTransaction[]
+  fundDetails FundTransaction[]
 }
 
 model FundTransaction {
