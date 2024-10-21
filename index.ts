@@ -22,6 +22,10 @@ app.use("/api/v1/fundTransactions", fundTransactionRoute);
 
 const port = process.env.PORT || 9000;
 
+app.listen(3001, () => {
+  console.log('Server is listening on port 3001');
+});
+
 // Spin-up server
 const start = async () => {
   try {
