@@ -19,7 +19,7 @@ COPY . .
 RUN npx tsc
 
 # Expose the port that the application listens on
-EXPOSE 3001
+EXPOSE 5000
 
 # Use a non-root user to run the application (security best practice)
 USER node

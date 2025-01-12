@@ -7,5 +7,6 @@ fundTransactionRoute.route("/").get(getAllFundTransactions).post(createFundTrans
 fundTransactionRoute.route("/months").get(getAllMonthlyDetails)
 fundTransactionRoute.route("/month/:monthId").get(getFundTransactionsByMonth)
 fundTransactionRoute.route("/member/:memberId").get(getFundTransactionsByMember)
+// Here you go
 
 export { fundTransactionRoute };
